@@ -35,7 +35,8 @@ def upload_file(localpath):
     sftp = paramiko.SFTPClient.from_transport(transport)
     #concatenates list-value to file output path string
     viewOutput = str(view()) + ".jpg"
-    fixedOutput = re.sub(r"\((,*?)\)","", viewOutput)
+    fixedOutput = viewOutput.replace("(","").replace(")","").replace("[","").replace("]","").replace(",","")
+    print(fixedOutput)
     outputpath = filepath + fixedOutput
     sftp.put(localpath,outputpath)
 
